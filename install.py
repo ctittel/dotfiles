@@ -41,4 +41,6 @@ elif is_linux:
     print("Setting up symlinks for Linux")
     create_symlink(local / ".emacs.d", user / ".emacs.d", True)
     create_symlink(local / "vimfiles", user / ".vim", True)
+    create_symlink(local / ".bashrc", user / ".bashrc", False)
+    create_symlink(local / ".bash_profile", user / ".bash_profile", False)
     vim_setup()
