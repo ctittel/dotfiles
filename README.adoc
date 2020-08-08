@@ -1,0 +1,15 @@
+= My Dotfiles
+
+== Elements
+=== Windows
+- Vim config
+- Emacs config
+
+=== Linux
+- Vim config
+- Emacs config
+- `.bashrc` and `.bash_profile`
+
+== Installation
+- run `install.py` with Python 3
+- requires admin rights on windows, but not on Linux
