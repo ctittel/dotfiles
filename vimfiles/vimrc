@@ -1,21 +1,18 @@
-	if has('win63') || has('win32') || has('win16')
+if has('win64') || has('win32') || has('win16')
 	call plug#begin('~/vimfiles/plugged')
 elseif has('unix')
-	call plug#being('~/.vim/plugged')
+  call plug#begin('~/.vim/plugged')
 endif
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'habamax/vim-asciidoctor'
 Plug 'jceb/vim-orgmode'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'alok/notational-fzf-vim'
 Plug 'tpope/vim-speeddating'
 Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " write PlugInstall to install those plugins
-
 
 set encoding=utf-8
 
@@ -42,7 +39,13 @@ set shiftwidth=2
 set expandtab
 
 colorscheme parsec
-set guifont=Source_Code_Pro:h12
+
+if has('win64') || has('win32') || has('win16')
+  set guifont=Source_Code_Pro:h12
+elseif has('unix')
+	set guifont="Ubuntu Mono 12"
+endif
+
 set incsearch
 set hlsearch
 
