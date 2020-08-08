@@ -14,7 +14,9 @@ def create_symlink(src, dest, is_dir=False, newname=None):
     dest = dest / newname
 
     if dest.exists():
-        print(dest, "exists already")
+        print(dest, "exists already, updating")
+        os.remove(dest)
+        os.symlink(src, dest, is_dir)
         return False
     else:
         os.symlink(src, dest, is_dir)
@@ -29,10 +31,10 @@ if is_windows:
     create_symlink(local / ".emacs.d", user / "AppData" / "Roaming", is_dir=True)
     if create_symlink(local / "vimfiles", user, is_dir = True):
         print("Run installation script for vim")
-        vim_setup()
+    vim_setup()
 elif is_linux:
     print("Setting up symlinks for Linux")
     os.symlink(local / ".emacs.d", user, True)
     if os.symlink(local / "vimfiles", user, True, newname='.vim'):
         print("Run installation script for vim")
-        vim_setup()
+    vim_setup()
