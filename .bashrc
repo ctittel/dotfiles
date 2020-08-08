@@ -128,58 +128,20 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-
 export ANDROID_NDK_ROOT=$ANDROID_HOME/ndk/21.0.6113669
 export ANDROID_NDK_HOME=$ANDROID_NDK_ROOT
 export ANDROID_NDK=$ANDROID_NDK_ROOT
-# export NDK_TOOLCHAIN2=~/Android/NDK_toolchain
 export NDK_TOOLCHAIN=$ANDROID_HOME/ndk/21.0.6113669/toolchains/llvm/prebuilt/linux-x86_64/bin
-# export ANDROID_NDK_HOME=/home/myself/bin/android-ndk-r10e
 
 # Flutter
 export PATH=$PATH:~/bin/flutter/bin
 export PATH=$PATH:$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin
 
-# export OPENSSL_ROOT_DIR=/opt/openssl
-# export OPENSSL_INCLUDE_DIR=$OPENSSL_ROOT_DIR/include/openssl
-# export OPENSSL_LIBRARIES=$OPENSSL_ROOT_DIR/
-
-# https://github.com/junegunn/fzf/wiki/examples#searching-file-contents
-# fif() {
-#     if [ ! "$#" -gt 0 ]; then
-#         echo "Need a string to search for!"
-#         return 1
-#     fi
-#     rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
-# }
-
-# fif() {
-#     if [ ! "$#" -gt 0 ]; then
-#         echo "Need a string to search for!"
-#         return 1
-#     fi
-#     local file
-#     file="$(rga --max-count=1 --ignore-case --files-with-matches --no-messages "$@" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$@"' {}")" # && open "$file"
-#     echo $file
-#     return 0
-# }
-
-# a() {
-#     cd ~/notes
-#     if [ ! "$#" -gt 0 ]; then
-#         echo "Need a string to search for!"
-#         return 1
-#     fi
-#     FIF_RESULT=$(fif $1)
-#     if [[ ! -z $FIF_RESULT ]]; then
-#         remarkable $FIF_RESULT
-#         return 0
-#     fi
-# }
-
 export NOTES="/home/chris/notes"
 alias mj='gocryptfs ~/OneDrive/Dateien/Journal/ "${NOTES}/journal"'
 alias umj='fusermount -u "${NOTES}/journal"'
+
+# Pyenv stuff
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
