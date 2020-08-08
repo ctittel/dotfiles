@@ -1,0 +1,36 @@
+= My vim config
+
+Currently contains:
+- installation script for windows (installs the plugin vim-plug which is able to install other plugins directly from GitHub)
+- installation of https://github.com/habamax/vim-asciidoctor[vim-asciidoctor] which is able to do AsciiDocotor code highlighting stuff 
+
+- this vim configuration is to make vim good for note taking
+- key plugins:
+  - plugins for markdown, org-mode and asciidoc formats
+  - for quick and powerful searching and creating of nodes: currently using notational-fzf-vim 
+
+== Functions
+=== General
+- backspace is configured to delete (like in other programs) - this is non-standard behavior
+
+=== https://github.com/junegunn/vim-plug[vim-plug] 
+- `:PlugInstall`: install all the configured plugins 
+- `:PlugUpgrade`: upgrade vim-plug
+- `:PlugUpdate`: update all configured plugins
+
+=== https://github.com/tpope/vim-fugitive[vim-fugitive]
+- `:Gmove`: rename files
+- its really a git plugin with lots of functions
+
+== Installation
+=== Step 1: Cloning of the directory
+- Linux: clone directly into the home directory (`~`); *CURRENTLY MISSING SCRIPT TO INSTALL `vim-plug` FROM GITHUB, ADAPT FROM `windows_install.ps1`*
+- Windows: clone into the user directory (`%userprofile%`) and rename the folder to `vimfiles`, then run the installation script `windows_install.ps1`
+
+=== Step 2: Installation of plugins
+- Open vim and run the command `:PlugInstall` to install the https://github.com/junegunn/vim-plug[vim-plug] plugins
+
+== Setup
+- To use notational-fzf-vim:
+	- install fzf and rg
+	- set system environment variable `$NOTES` to `path/to/note/directory` - *important:* no trailing slash at the end of the path 
