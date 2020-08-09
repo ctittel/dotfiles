@@ -43,14 +43,14 @@ colorscheme parsec
 if has('win64') || has('win32') || has('win16')
   set guifont=Source_Code_Pro:h12
 elseif has('unix')
-	set guifont="Ubuntu Mono 12"
+	set guifont=Ubuntu\ Mono\ 16
 endif
 
 set incsearch
 set hlsearch
 
-if has("gui_running")
+" if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=999 columns=999
-endif
+"  set lines=999 columns=999
+" endif
