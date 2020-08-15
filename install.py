@@ -41,6 +41,7 @@ def read_config():
     else:
         print("Config file not found! Creating ", config_file_path)
         print("Enter your configuration, possible: 'vim', 'emacs', 'bash' (each on a new line)")
+        config_file_path.touch()
         return None
 
 def vim():
