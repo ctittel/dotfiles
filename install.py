@@ -14,6 +14,8 @@ elif is_linux:
     user = PosixPath('~')
     user = user.expanduser()
 
+config_file_path = local / "config.txt"
+
 def create_symlink(src, dest, is_dir=False):
     """ Returns True if symlink is created, False if it already exists.
     src: existing file
@@ -30,28 +32,57 @@ def create_symlink(src, dest, is_dir=False):
         os.symlink(src, dest, is_dir)
         return True
 
-def vim_setup():
+def read_config():
+    if config_file_path.exists():
+        with open(config_file_path) as f:
+            a = f.read()
+        a.split("\n")
+        return a
+    else:
+        print("Config file not found! Creating ", config_file_path)
+        print("Enter your configuration, possible: 'vim', 'emacs', 'bash' (each on a new line)")
+        return None
+
+def vim():
     uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     path = pathlib.Path(__file__).parent.absolute() / '.vim/autoload/plug.vim'
     path.parents[0].mkdir(parents=True, exist_ok=True)
     urllib.request.urlretrieve(uri,path )
-
-def main():
-    print("local: ", local)
-    print("user: ", user)
-
     if is_windows:
-        print("Setting up symlinks for Windows")
-        create_symlink(local / ".emacs.d", user / "AppData" / "Roaming" / ".emacs.d", is_dir=True)
         create_symlink(local / ".vim", user / "vimfiles", is_dir = True)
-        vim_setup()
     elif is_linux:
-        print("Setting up symlinks for Linux")
-        create_symlink(local / ".emacs.d", user / ".emacs.d", True)
         create_symlink(local / ".vim", user / ".vim", True)
+
+def emacs():
+    if is_windows:
+        create_symlink(local / ".emacs.d", user / "AppData" / "Roaming" / ".emacs.d", is_dir=True)
+    elif is_linux:
+        create_symlink(local / ".emacs.d", user / ".emacs.d", True)
+
+def bash():
+    if is_linux:
         create_symlink(local / ".bashrc", user / ".bashrc", False)
         create_symlink(local / ".bash_profile", user / ".bash_profile", False)
-        vim_setup()
+
+
+def main():
+    config = read_config()
+
+    if config:
+        print("local: ", local)
+        print("user: ", user)
+
+        if is_windows:
+            print("Windows detected")
+        elif is_linux:
+            print("Linux detected")
+
+        if "vim" in config:
+            vim()
+        if "emacs" in config:
+            emacs()
+        if "bash" in config:
+            bash()
 
 if __name__ == "__main__":
     main()
