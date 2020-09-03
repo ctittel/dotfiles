@@ -41,7 +41,7 @@ set expandtab
 if has('win64') || has('win32') || has('win16')
   set guifont=Source_Code_Pro:h12
 elseif has('unix')
-	set guifont=Ubuntu\ Mono\ 16
+	set guifont=Ubuntu\ Mono\ 14
 endif
 
 set incsearch

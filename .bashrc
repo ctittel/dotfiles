@@ -137,8 +137,8 @@ export NDK_TOOLCHAIN=$ANDROID_HOME/ndk/21.0.6113669/toolchains/llvm/prebuilt/lin
 export PATH=$PATH:~/bin/flutter/bin
 export PATH=$PATH:$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin
 
-export NOTES="/home/chris/notes"
-alias mj='gocryptfs ~/OneDrive/Dateien/Journal/ "${NOTES}/journal"'
+export NOTES="$HOME/notes"
+alias mj='gocryptfs ${HOME}/cloud/notes/journal/ "${NOTES}/journal"'
 alias umj='fusermount -u "${NOTES}/journal"'
 
 # Pyenv stuff
