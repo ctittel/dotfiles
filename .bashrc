@@ -151,3 +151,5 @@ eval "$(pyenv virtualenv-init -)"
 
 # Torch: there are no CUDA GPUs, use only CPU
 export CUDA_VISIBLE_DEVICES=""
+
+alias sshfsi06='sshfs christoph@i06se2.in.tum.de:/home/christoph ~/i06server'

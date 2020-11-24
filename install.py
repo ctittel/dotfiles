@@ -13,6 +13,8 @@ if is_windows:
 elif is_linux:
     user = PosixPath('~')
     user = user.expanduser()
+else:
+    raise Exception(f"Unknown OS '{platform.system()}' Supported: Windows, Linux")
 
 config_file_path = local / "config.txt"
 
