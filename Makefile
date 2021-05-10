@@ -4,9 +4,11 @@ VIM_DIR 	:= ${HOME}/.vim
 EMACS_DIR	:= ${HOME}/.emacs.d
 
 .PHONY: install/common
+install/common:
 	apt-get install -y trash
 
 .PHONY: install/vim
+install/vim:
 	apt-get install -y vim
 
 .PHONY: install/emacs
@@ -28,6 +30,11 @@ config/vim: delete/${VIM_DIR}/autoload delete/${VIM_DIR}/plugged delete/${VIM_DI
 	ln -s ${CURDIR}/.vim ${VIM_DIR}
 	curl -fLo ${VIM_DIR}/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	vim +PlugInstall +qall
+
+.PHONY: config/bashrc
+config/bashrc:
+	echo '# Add custom important stuff to this file:' >> ${HOME}/.bashrc
+	echo . ${CURDIR}/.bashrc >> ${HOME}/.bashrc
 
 # deletes the given path
 .PHONY: delete/%
