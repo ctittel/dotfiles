@@ -2,6 +2,7 @@
 REAL_USER 	:= $(if $(SUDO_USER), $(SUDO_USER), $(USER))
 VIM_DIR 	:= ${HOME}/.vim
 EMACS_DIR	:= ${HOME}/.emacs.d
+SHUTDOWN_SCRIPT_LOCATION := /etc/rc0.d/Kct-exit-script.sh
 
 .PHONY: install/common
 install/common:
@@ -13,6 +14,13 @@ install/vim:
 
 .PHONY: install/emacs
 	apt-get install -y emacs
+
+# See https://unix.stackexchange.com/questions/350637/run-script-at-shutdown
+.PHONY: install/exit_script
+install/exit_script:
+	echo "Registering exit_script to be executed on shutdown"
+	rm -f "${SHUTDOWN_SCRIPT_LOCATION}"
+	sudo ln -s $$(pwd)/exit-script.bash "${SHUTDOWN_SCRIPT_LOCATION}"
 
 .PHONY: config/git
 config/git:
@@ -34,7 +42,7 @@ config/vim: delete/${VIM_DIR}/autoload delete/${VIM_DIR}/plugged delete/${VIM_DI
 .PHONY: config/bashrc
 config/bashrc:
 	echo '# Add custom important stuff to this file:' >> ${HOME}/.bashrc
-	echo . ${CURDIR}/.bashrc >> ${HOME}/.bashrc
+	echo ". ${CURDIR}/bashrc.bash" >> ${HOME}/.bashrc
 
 # deletes the given path
 .PHONY: delete/%
