@@ -27,6 +27,12 @@ install/exit_script:
 	rm -f "${SHUTDOWN_SCRIPT_LOCATION}"
 	sudo ln -s $$(pwd)/exit-script.bash "${SHUTDOWN_SCRIPT_LOCATION}"
 
+.PHONY: install/scripts
+install/scripts:
+	cp -f "$$(pwd)/root-scripts/fzf-apt-install" /usr/local/bin
+	cp -f "$$(pwd)/root-scripts/fzf-apt-remove" /usr/local/bin
+	cp -f "$$(pwd)/root-scripts/fzf-process-kill" /usr/local/bin
+
 .PHONY: config/bashrc
 config/bashrc:
 	echo '# Add custom important stuff to this file:' >> ${HOME}/.bashrc

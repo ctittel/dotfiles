@@ -1,0 +1,12 @@
+#!/bin/bash
+
+inst="$(apt-cache search . | fzf -m  | grep -o '^\S*')"
+
+echo "=== Selcted Packages ==="
+echo "$inst"
+echo "======"
+if [[ $inst ]]; then
+    for prog in $(echo $inst); do
+        apt-get install $prog
+    done
+fi

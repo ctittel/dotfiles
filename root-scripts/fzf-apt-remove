@@ -1,0 +1,12 @@
+#!/bin/bash
+
+inst="$(apt list --installed | fzf -m  | grep -o '^[a-zA-Z0-9\\-]*')"
+
+echo "=== Selcted Packages ==="
+echo "$inst"
+echo "======"
+if [[ $inst ]]; then
+    for prog in $(echo $inst); do
+        apt-get remove $prog
+    done
+fi

@@ -35,9 +35,12 @@ ct-git-sync() {
 
 ct-git-set-local() {
     read -p "Enter local email for git: " GIT_MAIL && git config user.email "${GIT_MAIL}"
-	read -p "Enter local name for git: " GIT_NAME && git config user.name "${GIT_NAME}"
-	git config user.email
-	git config user.name
+    read -p "Enter local name for git: " GIT_NAME && git config user.name "${GIT_NAME}"
+    git config user.email
+    git config user.name
 }
 
 alias isodate='date --iso-8601'
+
+# FZF commands - source https://github.com/junegunn/fzf/wiki/examples#processes
+
