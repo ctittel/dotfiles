@@ -4,6 +4,11 @@ VIM_DIR 	:= ${HOME}/.vim
 EMACS_DIR	:= ${HOME}/.emacs.d
 SHUTDOWN_SCRIPT_LOCATION := /etc/rc0.d/Kct-exit-script.sh
 
+.PHONY: install/scripts
+install/scripts:
+	echo "Make sure that /usr/local/bin is in your PATH!"
+	cp scripts/* /usr/local/bin
+
 .PHONY: install/common
 install/common:
 	apt-get install -y trash ripgrep
@@ -26,12 +31,6 @@ install/exit_script:
 	echo "Registering exit_script to be executed on shutdown"
 	rm -f "${SHUTDOWN_SCRIPT_LOCATION}"
 	sudo ln -s $$(pwd)/exit-script.bash "${SHUTDOWN_SCRIPT_LOCATION}"
-
-.PHONY: install/scripts
-install/scripts:
-	cp -f "$$(pwd)/root-scripts/fzf-apt-install" /usr/local/bin
-	cp -f "$$(pwd)/root-scripts/fzf-apt-remove" /usr/local/bin
-	cp -f "$$(pwd)/root-scripts/fzf-process-kill" /usr/local/bin
 
 .PHONY: config/bashrc
 config/bashrc:
