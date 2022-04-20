@@ -1,0 +1,51 @@
+#!/bin/bash
+
+my-prepare-prettyprint-query() {
+    TERMS=$@
+    if [ -z $TERMS ]; then
+        TERMS='$'
+    fi
+    for query in $TERMS; do
+        echo "-e $query "
+    done
+
+}
+
+# RGA options:
+# --hidden: search hidden files
+# --line-number: show line number
+# --pre CMD: search the output of CMD <file> instead of the content of <file>
+
+my-rga-prettyprint() {
+    QUERY="$(my-prepare-prettyprint-query $1)"
+    rga --with-filename \
+        --pretty --context 5 \
+        --multiline --multiline-dotall \
+        $QUERY "$2"
+}
+
+my-file-search() {
+    FILES="$(echo .)"
+
+    TERMS=$@
+    if [ -z $TERMS ]; then
+        TERMS='$'
+    fi
+    for QUERY in $TERMS; do
+        x=$(echo "$FILES" | xargs -d $'\n' cttest $QUERY)
+        FILES=$(echo "$FILES" | xargs -d $'\n' rga -L -H --multiline --multiline-dotall --files-with-matches $QUERY)
+    done
+    echo "$FILES"
+}
+
+export -f my-file-search
+export -f my-rga-prettyprint
+export -f my-prepare-prettyprint-query
+
+export FZF_DEFAULT_COMMAND="my-file-search"
+fzf --sort --preview="[[ ! -z {} ]] && my-rga-prettyprint {q} {}" \
+    --bind "change:reload:my-file-search {q}" \
+    --phony \
+    $@
+    # -q '' \
+    # --preview-window="70%:wrap" \
