@@ -8,7 +8,6 @@ my-prepare-prettyprint-query() {
     for query in $TERMS; do
         echo "-e $query "
     done
-
 }
 
 # RGA options:
@@ -43,9 +42,15 @@ export -f my-rga-prettyprint
 export -f my-prepare-prettyprint-query
 
 export FZF_DEFAULT_COMMAND="my-file-search"
-fzf --sort --preview="[[ ! -z {} ]] && my-rga-prettyprint {q} {}" \
-    --bind "change:reload:my-file-search {q}" \
-    --phony \
-    $@
-    # -q '' \
-    # --preview-window="70%:wrap" \
+
+FILE=$(
+    fzf --sort --preview="[[ ! -z {} ]] && my-rga-prettyprint {q} {}" \
+        --bind "change:reload:my-file-search {q}" \
+        --phony
+)
+# -q '' \
+# --preview-window="70%:wrap" \
+
+[[ -z "$FILE" ]] && echo "No File selected!" && echo "" && exit
+[[ -z "$@" ]] && echo "$FILE" && exit
+$@ $FILE
